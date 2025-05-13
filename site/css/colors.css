@@ -1,0 +1,51 @@
+:root {
+    /* =================== */
+    /* Colors */
+    /* =================== */
+    --light-100: #fcfbf9;
+    --light-200: #f8f4f0;
+    --light-300: #f2ede7;
+    --light-400: #e6e1da;
+    --light-500: #d8d1c7;
+    --light-700: #a2a9a3;
+    --light-800: #76847e;
+    --light-900: #002E22;
+    --green: #03D47C;
+    --green-hover: #00C271;
+
+    /* =================== */
+    /* Theme */
+    /* =================== */
+    /* Text */
+    --text: var(--light-900);
+    --text-inverted: var(--light-100);
+
+    /* Background colors */
+    --background-body: var(--light-100);
+    --background-card: var(--light-200);
+    --background-header: var(--light-900);
+
+    /* Buttons */
+    --button-background: var(--green);
+    --button-background-hover: var(--green-hover);
+    --button-text: var(--light-100);
+    --button-text-hover: var(--light-900);
+    --button-secondary-background: var(--light-200);
+    --button-secondary-text: var(--text);
+    --button-secondary-background-hover: var(--light-400);
+
+    /* Borders */
+    --border: var(--light-500);
+
+    /* Table colors */
+    --table-background: var(--light-200);
+    --table-header-background: var(--light-900);
+    --table-header-text: var(--light-100);
+    --table-row-alt-background: var(--light-300);
+
+    /* Forms */
+    --form-background: var(--light-200);
+    --form-label: var(--light-900);
+    --input-checkbox: var(--green);
+}
+

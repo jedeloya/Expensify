@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>Todo List</title>
+    <link rel="icon" href="favicon.png">
+    <script type="module" src="js/index.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <header id="nav-header">
+        <a href="" id="nav-title">Todo List &#x2713;</a>
+        <div>
+            <a class="button primary nav-button" id="login-button">Login</a>
+            <a class="button primary nav-button" id="signup-button">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main site content: create todo form and todo list -->
+    <main>
+        <form id="create-todo-form">
+            <legend>Insert new Todo Item</legend>
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text" placeholder="Wash the dishes" required />
+            <button class="button primary" type="submit"> Submit</button>
+        </form>
+        <table id="todo-table">
+            <thead>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Completed</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Login modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="login-username">Username</label>
+                <input type="text" name="username" id="login-username" required>
+                <label for="login-password">Password</label>
+                <input type="password" name="password" id="login-password" required>
+                <div class="modal-buttons">
+                    <button class="button secondary close-modal" data-target="login-modal">Cancel</button>
+                    <button class="button primary" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <label for="signup-username">Username</label>
+                <input type="text" name="username" id="signup-username" required>
+                <label for="signup-password">Password</label>
+                <input type="password" name="password" id="signup-password" required>
+                <div class="modal-buttons">
+                    <button class="button secondary close-modal" data-target="signup-modal">Cancel</button>
+                    <button class="button primary" type="submit">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

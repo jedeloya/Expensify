@@ -1,0 +1,56 @@
+<?php return array(
+    'root' => array(
+        'name' => 'expensify/todo',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'a34943b376526fcb244b9d893047ab8774c0b3b1',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'expensify/bedrock-php' => array(
+            'pretty_version' => '2.0.12',
+            'version' => '2.0.12.0',
+            'reference' => 'f822ca6d95da7d6d6104d532021f4f9911e52757',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../expensify/bedrock-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'expensify/todo' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'a34943b376526fcb244b9d893047ab8774c0b3b1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'monolog/monolog' => array(
+            'pretty_version' => '2.10.0',
+            'version' => '2.10.0.0',
+            'reference' => '5cf826f2991858b54d5c3809bee745560a1042a7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/log' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'reference' => '5277094ed527a1c4477177d102fe4c53551953e0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/log',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/log-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+            ),
+        ),
+    ),
+);

@@ -1,0 +1,33 @@
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--light-100);
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.close-modal {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.modal-buttons .button {
+    flex: 1;
+    min-width: 80px;
+}
+

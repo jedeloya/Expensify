@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--table-background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: var(--table-header-background);
+    color: var(--table-header-text);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--table-row-alt-background);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--input-checkbox);
+}
+
