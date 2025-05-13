@@ -1,9 +1,8 @@
-# GIT_REVISION = $(shell git rev-parse HEAD | grep -o '^.\{10\}')
-# PROJECT = $(shell git rev-parse --show-toplevel)
-BEDROCK = $(realpath ../../Bedrock)
+GIT_REVISION = $(shell git rev-parse HEAD | grep -o '^.\{10\}')
+PROJECT = $(shell git rev-parse --show-toplevel)
+BEDROCK = $(realpath $(PROJECT)/../Bedrock)
 INCLUDE = -I$(BEDROCK) -I$(BEDROCK)/mbedtls/include -I../plugin
-# CXXFLAGS = -g -std=c++20 -fpic -O2 $(BEDROCK_OPTIM_COMPILE_FLAG) -Wall -Werror -Wformat-security -Wno-unqualified-std-cast-call -DGIT_REVISION=$(GIT_REVISION) $(INCLUDE)
-CXXFLAGS = -g -std=c++20 -fpic -O2 $(BEDROCK_OPTIM_COMPILE_FLAG) -Wall -Werror -Wformat-security -Wno-unqualified-std-cast-call $(INCLUDE)
+CXXFLAGS = -g -std=c++20 -fpic -O2 $(BEDROCK_OPTIM_COMPILE_FLAG) -Wall -Werror -Wformat-security -Wno-unqualified-std-cast-call -DGIT_REVISION=$(GIT_REVISION) $(INCLUDE)
 
 # We'll stick object and dependency files in here so we don't need to look at them.
 INTERMEDIATEDIR = .build

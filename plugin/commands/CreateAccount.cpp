@@ -18,7 +18,7 @@ void CreateAccount::process(SQLite& db) {
     SQResult results;
     const int64_t accountID = SToInt64(db.read("SELECT MAX(accountID) FROM accounts;")) + 1;
 
-    db.write(format("INSERT INTO todo (accountID, name, email, password) VALUES ({}, {}, {}, {});", SQ(accountID), SQ(request["name"]), SQ(request["email"]), SQ(request["password"])));
+    db.write(format("INSERT INTO accounts (accountID, name, email, password) VALUES ({}, {}, {}, {});", SQ(accountID), SQ(request["name"]), SQ(request["email"]), SQ(request["password"])));
 
     SData data;
     data["accountID"] = to_string(accountID);

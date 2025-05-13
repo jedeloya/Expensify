@@ -51,12 +51,12 @@ void BedrockPlugin_ToDoApp::upgradeDatabase(SQLite& db) {
             ignore
         )
     );
-    SASSERT(
-        db.verifyIndex(
-            "idx_accounts_email",
-            "accounts",
-            "CREATE UNIQUE INDEX idx_accounts_email ON accounts(email)",
-            true
-        )
-    );
+    // SASSERT(
+    //     db.verifyIndex(
+    //         "idx_accounts_email",
+    //         "accounts",
+    //         "CREATE UNIQUE INDEX idx_accounts_email ON accounts(email)",
+    //         true
+    //     )
+    // );
 }

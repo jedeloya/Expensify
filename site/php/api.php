@@ -70,6 +70,9 @@ switch ($command) {
     case 'GetToDoItems':
         echo json_encode(callBedrock("GetToDoItems"));
         break;
+    case 'CreateAccount':
+        echo json_encode(callBedrock("CreateAccount"));
+        break;
     default:
         http_response_code(404);
         echo json_encode(['error' => "unknown command $command"]);
