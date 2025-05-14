@@ -11,6 +11,7 @@ bool CreateAccount::peek(SQLite& db) {
     return false;
 }
 void CreateAccount::process(SQLite& db) {
+    SINFO("name: " + request["name"] + " email: " + request["email"] + " pass: " + request["password"]);
     if(request["name"].empty() || request["email"].empty() || request["password"].empty()) {
         response.methodLine = "400 Bad Request";
         return;

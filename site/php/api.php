@@ -71,7 +71,7 @@ switch ($command) {
         echo json_encode(callBedrock("GetToDoItems"));
         break;
     case 'CreateAccount':
-        echo json_encode(callBedrock("CreateAccount"));
+        echo json_encode(callBedrock("CreateAccount", ["name"=>$_POST["name"], "email"=>$_POST["email"], "password"=>$_POST["password"]]));
         break;
     default:
         http_response_code(404);

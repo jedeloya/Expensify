@@ -33,7 +33,7 @@ async function apiRequest(command, method, body = {}) {
             method,
             body: method === HTTP_METHOD.POST ? createFormData(body) : undefined,
         });
-    
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -55,7 +55,7 @@ const API = {
     createToDoItem: async (description) => apiRequest(
         'CreateToDoItem',
         HTTP_METHOD.POST,
-        {description}
+        { description }
     ),
 
     /**
@@ -80,9 +80,10 @@ const API = {
      *
      * @returns {Promise}
      */
-    signup: async(username, password) => apiRequest('SignUp', HTTP_METHOD.POST, {
-        username,
+    signup: async (email, password, name) => apiRequest('CreateAccount', HTTP_METHOD.POST, {
+        email,
         password,
+        name,
     }),
 };
 

@@ -7,4 +7,5 @@ export default {
    SIGNUP_FORM_ID: 'signup-form',
    SIGNUP_MODAL_ID: 'signup-modal',
    TODO_TABLE_ID: 'todo-table',
+   LOGGED_USERNAME_ID: 'logged-username',
 };

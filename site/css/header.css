@@ -15,8 +15,14 @@
     text-decoration: none;
 }
 
+#logged-username {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-inverted);
+    text-decoration: none;
+}
+
 #nav-header div {
     display: flex;
     gap: 15px;
 }
-
