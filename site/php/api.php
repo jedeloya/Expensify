@@ -71,7 +71,20 @@ switch ($command) {
         echo json_encode(callBedrock("GetToDoItems"));
         break;
     case 'CreateAccount':
-        echo json_encode(callBedrock("CreateAccount", ["name"=>$_POST["name"], "email"=>$_POST["email"], "password"=>$_POST["password"]]));
+        echo json_encode(callBedrock("CreateAccount", ["name"=>$_POST["name"], "email"=>$_POST["email"], "password"=>password_hash($_POST["password"], PASSWORD_DEFAULT)]));
+        break;
+    case 'GetAccount':
+        $result = callBedrock("GetAccount", ["email"=>$_POST["email"]]);
+        $user = $result[0];
+        Log::info("result:".json_encode($result));
+        Log::info("password: ".$_POST["password"]." hash password:".$user["password"]);
+        if(!password_verify($_POST["password"], $user["password"])) {
+            echo json_encode(["error"=>"Bad user name or password"]);
+            break;
+        }
+        unset($user["password"]);
+        Log::info("After delete passwordresult:".json_encode($user));
+        echo json_encode($user);
         break;
     default:
         http_response_code(404);

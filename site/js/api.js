@@ -70,8 +70,8 @@ const API = {
      *
      * @returns {Promise}
      */
-    login: async (username, password) => apiRequest('Login', HTTP_METHOD.POST, {
-        username,
+    login: async (email, password) => apiRequest('GetAccount', HTTP_METHOD.POST, {
+        email,
         password,
     }),
 

@@ -1,5 +1,5 @@
-.build/commands/CreateToDoItem.o: commands/CreateToDoItem.cpp \
-  commands/CreateToDoItem.h /home/candidate/Bedrock/BedrockPlugin.h \
+.build/commands/GetAccount.o: commands/GetAccount.cpp \
+  commands/GetAccount.h /home/candidate/Bedrock/BedrockPlugin.h \
   /home/candidate/Bedrock/BedrockCommand.h \
   /home/candidate/Bedrock/libstuff/SHTTPSManager.h \
   /home/candidate/Bedrock/libstuff/SData.h \

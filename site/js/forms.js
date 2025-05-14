@@ -1,5 +1,6 @@
 import API from './api.js';
 import CONST from './CONST.js';
+import modal from './modal.js';
 import Table from './table.js';
 
 /**
@@ -13,10 +14,12 @@ function initLoginButtons() {
         document.getElementById(CONST.SIGNUP_BUTTON_ID).style.display = 'none';
         document.getElementById(CONST.LOGGED_USERNAME_ID).style.display = 'block';
         document.getElementById(CONST.LOGGED_USERNAME_ID).innerHTML = "Welcome " + username;
+        document.getElementById(CONST.LOGOUT_BUTTON_ID).style.display = 'block';
     } else {
         document.getElementById(CONST.LOGIN_BUTTON_ID).style.display = 'block';
         document.getElementById(CONST.SIGNUP_BUTTON_ID).style.display = 'block';
         document.getElementById(CONST.LOGGED_USERNAME_ID).style.display = 'none';
+        document.getElementById(CONST.LOGOUT_BUTTON_ID).style.display = 'none';
     }
 }
 /**
@@ -58,14 +61,18 @@ function initSignupForm() {
         .addEventListener('submit', async (e) => {
             e.preventDefault();
             sessionStorage.removeItem('user');
-            const { email, password } = getUsernameAndPassword(CONST.SIGNUP_FORM_ID);
+            const { username, password } = getUsernameAndPassword(CONST.SIGNUP_FORM_ID);
+            const email = username;
             const name = document.querySelector(`#${CONST.SIGNUP_FORM_ID} input[name=name]`).value;
             try {
                 const userdata = await API.signup(email, password, name);
-                console.log(userdata);
-                sessionStorage.setItem('user', JSON.stringify(userdata));
+                if (!userdata.error) {
+                    sessionStorage.setItem('user', JSON.stringify(userdata));
+                }
+                initLoginButtons();
             } finally {
                 document.getElementById(CONST.SIGNUP_FORM_ID).reset();
+                modal.hide(CONST.SIGNUP_MODAL_ID);
             }
         });
 }
@@ -80,11 +87,28 @@ function initLoginForm() {
             sessionStorage.removeItem('user');
             const { username, password } = getUsernameAndPassword(CONST.LOGIN_FORM_ID);
             try {
-                const userdata = await API.login(username, password);
-                sessionStorage.setItem('user', JSON.stringify(userdata));
+                const email = username
+                const userdata = await API.login(email, password);
+                console.log(userdata);
+                if (!userdata.error) {
+                    sessionStorage.setItem('user', JSON.stringify(userdata));
+                }
+                initLoginButtons();
             } finally {
                 document.getElementById(CONST.LOGIN_FORM_ID).reset();
+                modal.hide(CONST.LOGIN_MODAL_ID);
             }
+        });
+}
+
+/**
+ * Setup logout event handler to make logout.
+ */
+function initLogout() {
+    document.getElementById(CONST.LOGOUT_BUTTON_ID)
+        .addEventListener('click', async (e) => {
+            sessionStorage.removeItem('user');
+            initLoginButtons();
         });
 }
 
@@ -93,6 +117,7 @@ function initLoginForm() {
  */
 function init() {
     initLoginButtons();
+    initLogout();
     initCreateTodoForm();
     initSignupForm();
     initLoginForm();

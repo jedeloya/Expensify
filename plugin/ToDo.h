@@ -5,6 +5,7 @@
 #include <commands/GetToDoItems.h>
 #include <commands/CreateToDoItem.h>
 #include <commands/CreateAccount.h>
+#include <commands/GetAccount.h>
 
 class GetToDoItems;
 class CreateToDoItem;
