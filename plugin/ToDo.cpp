@@ -34,7 +34,7 @@ unique_ptr<BedrockCommand> BedrockPlugin_ToDoApp::getCommand(SQLiteCommand&& bas
     } else if (SStartsWith(SToLower(baseCommand.request.methodLine), "getaccount")) {
         return make_unique<GetAccount>(move(baseCommand), this);
     } else if (SStartsWith(SToLower(baseCommand.request.methodLine), "updatetodoitem")) {
-        return make_unique<GetAccount>(move(baseCommand), this);
+        return make_unique<UpdateToDoItem>(move(baseCommand), this);
     }
     return nullptr;
 }

@@ -1,6 +1,30 @@
 import API from './api.js';
 import CONST from './CONST.js';
+import Modal from './modal.js';
 
+/**
+ * Init Checkboxes onclick functions to send the correct update request.
+ * 
+ * @returns {Promise<void>}
+ */
+function initCheckboxes() {
+    const checkboxes = document.querySelectorAll('.todo-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.onclick = async function () {
+            console.log('Clicked');
+            try{
+                const user = sessionStorage.getItem('user');
+                const accountID = user ? JSON.parse(user).accountID : '';
+                const todoID = this.dataset.id;
+                const completed = this.checked;
+                await API.updateToDoItem(accountID, todoID, completed);
+                Modal.showMessage("Todo item was updated");
+            } catch(e) {
+                Modal.showMessage("Error on updating the todo item", true);
+            }
+        }
+    })
+}
 /**
  * Generate the html tr for a table item
  *
@@ -16,18 +40,7 @@ function createTableItem(todoID, description, completed, name, accountId) {
                 <td>${todoID}</td>
                 <td>${description}</td>
                 <td>${name}</td>
-                <td><input type="checkbox" value="${todoID}" ${accountId == sessionAccountID ? 'enabled' : 'disabled'} ${completed ? 'checked' : ''} 
-                onclick="async (event) => { console.log('Clicked');
-                e.preventDefault();
-                    try{
-                            const user = sessionStorage.getItem('user');
-                            const accountID = user ? JSON.parse(user).accountID : '';
-                            const todoID = this.value;
-                            const completed = this.checked;
-                            await API.updateToDoItem(accountID, todoID, completed);
-                        } finally {
-                            Table.init();
-}}"></td>
+                <td><input type="checkbox" class="todo-checkbox" data-id="${todoID}" ${accountId == sessionAccountID ? 'enabled' : 'disabled'} ${completed ? 'checked' : ''}></td>
             </tr>`;
 }
 
@@ -45,6 +58,7 @@ async function init() {
         tableRows += createTableItem(el.todoID, el.description, el.completed ?? false, el.userName, el.accountID);
     });
     document.querySelector(`#${CONST.TODO_TABLE_ID} tbody`).innerHTML = tableRows;
+    initCheckboxes();
 }
 
 /**
@@ -57,6 +71,7 @@ async function init() {
  */
 function insertItem(todoItem) {
     document.querySelector(`#${CONST.TODO_TABLE_ID} tbody`).innerHTML += createTableItem(todoItem.todoID, todoItem.description, todoItem.completed ?? false, todoItem.userName ?? "", todoItem.accountID ?? "");
+    initCheckboxes();
     // console.log(`[Table] Inserted new todo w/ ID ${todoItem.todoID} into the table`);
 }
 

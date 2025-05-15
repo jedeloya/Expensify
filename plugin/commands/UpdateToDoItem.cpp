@@ -13,11 +13,16 @@ bool UpdateToDoItem::peek(SQLite& db) {
     return false;
 }
 void UpdateToDoItem::process(SQLite& db) {
-    if(request["todoID"].empty() || request["completed"].empty() || request["accountID"].empty()) {
+    SINFO("TODOID: "  + request["todoID"] + " completed: " + request["completed"] + " accountID: " + request["accountID"]);
+    if(request["todoID"].empty() || request["completed"].empty()) {
         response.methodLine = "400 Bad Request";
         return;
     }
-    db.write(format("UPDATE todo SET completed = {} WHERE todoID = {} AND accountID = {};", SQ(request["completed"]), SQ(request["todoID"]), SQ(request["accountID"])));
+    if(request["accountID"].empty()) {
+        db.write(format("UPDATE todo SET completed = {} WHERE todoID = {} AND accountID IS NULL;", SQ(request["completed"]), SQ(request["todoID"]), SQ(request["accountID"])));
+    } else {
+        db.write(format("UPDATE todo SET completed = {} WHERE todoID = {} AND accountID = {};", SQ(request["completed"]), SQ(request["todoID"]), SQ(request["accountID"])));
+    }
 
     SData data;
     data["todoID"] = request["todoID"];

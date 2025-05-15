@@ -1,3 +1,5 @@
+import CONST from './CONST.js';
+
 /**
  * Show a modal.
  *
@@ -52,9 +54,33 @@ function init() {
     });
 }
 
+/**
+ * Show error box.
+ *
+ * @param {string} message
+ * @param {boolean} isError 
+ * @param {int} duration
+ */
+function showMessage(message, isError = false, duration = 3000) {
+  const errorBox = document.getElementById(CONST.ERROR_BOX_ID);
+  errorBox.textContent = message;
+  errorBox.style.display = 'block';
+  errorBox.style.backgroundColor = isError ? 'red' : 'green';
+
+  // Clear any existing timeout
+  if (errorBox.hideTimeout) clearTimeout(errorBox.hideTimeout);
+
+  // Auto-hide after `duration` ms
+  errorBox.hideTimeout = setTimeout(() => {
+    errorBox.style.display = 'none';
+    errorBox.textContent = '';
+  }, duration);
+}
+
 export default {
     init,
     show,
     hide,
+    showMessage,
 };
 

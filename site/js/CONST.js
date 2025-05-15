@@ -9,4 +9,5 @@ export default {
    TODO_TABLE_ID: 'todo-table',
    LOGGED_USERNAME_ID: 'logged-username',
    LOGOUT_BUTTON_ID: 'logout-button',
+   ERROR_BOX_ID: 'error-box',
 };

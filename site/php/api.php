@@ -96,6 +96,9 @@ switch ($command) {
         Log::info("After delete passwordresult:".json_encode($user));
         echo json_encode($user);
         break;
+    case 'UpdateToDoItem':
+        echo json_encode(callBedrock("UpdateToDoItem", ["todoID" => $_POST["todoID"], "accountID" => $_POST["accountID"], "completed" => $_POST["completed"]=="true"?1:0]));
+        break;
     default:
         http_response_code(404);
         echo json_encode(['error' => "unknown command $command"]);

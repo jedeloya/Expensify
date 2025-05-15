@@ -12,4 +12,3 @@ document.getElementById(CONST.SIGNUP_BUTTON_ID).addEventListener('click', () => 
 Forms.init();
 Modal.init();
 Table.init();
-

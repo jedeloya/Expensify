@@ -27,3 +27,12 @@ main {
     align-items: center;
 }
 
+#error-box {
+    display:none; 
+    color: white; 
+    background: red; 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin: 10px 0;
+}
+

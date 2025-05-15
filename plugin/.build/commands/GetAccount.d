@@ -25,4 +25,5 @@
   /home/candidate/Bedrock/BedrockBlockingCommandQueue.h \
   /home/candidate/Bedrock/BedrockTimeoutCommandQueue.h \
   ../plugin/commands/GetToDoItems.h ../plugin/commands/CreateToDoItem.h \
-  ../plugin/commands/CreateAccount.h ../plugin/commands/GetAccount.h
+  ../plugin/commands/CreateAccount.h ../plugin/commands/GetAccount.h \
+  ../plugin/commands/UpdateToDoItem.h

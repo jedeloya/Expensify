@@ -115,13 +115,11 @@ const API = {
      * @param {boolean} completed
      * @returns {Promise<Array<{accountID: int, todoID: int, completed: boolean}>>}
      */
-    updateToDoItem: async (accountID, todoID, completed) => {
-        console.log("Called update todo");
-        apiRequest('UpdateToDoItem', HTTP_METHOD.POST, {
+    updateToDoItem: async (accountID, todoID, completed) => apiRequest('UpdateToDoItem', HTTP_METHOD.POST, {
         accountID,
         todoID,
         completed,
-    })},
+    }),
 };
 
 export default API;

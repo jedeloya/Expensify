@@ -15,11 +15,13 @@ function initLoginButtons() {
         document.getElementById(CONST.LOGGED_USERNAME_ID).style.display = 'block';
         document.getElementById(CONST.LOGGED_USERNAME_ID).innerHTML = "Welcome " + username;
         document.getElementById(CONST.LOGOUT_BUTTON_ID).style.display = 'block';
+        document.getElementById(CONST.CREATE_TODO_FORM_ID).style.display = 'block';
     } else {
         document.getElementById(CONST.LOGIN_BUTTON_ID).style.display = 'block';
         document.getElementById(CONST.SIGNUP_BUTTON_ID).style.display = 'block';
         document.getElementById(CONST.LOGGED_USERNAME_ID).style.display = 'none';
         document.getElementById(CONST.LOGOUT_BUTTON_ID).style.display = 'none';
+        document.getElementById(CONST.CREATE_TODO_FORM_ID).style.display = 'none';
     }
 }
 /**
@@ -37,6 +39,7 @@ function initCreateTodoForm() {
             try {
                 const user = sessionStorage.getItem('user');
                 const sessionAccountID = user ? JSON.parse(user).accountID : "";
+                // Support add accounts if not login.
                 if(sessionAccountID != "") {
                     const todoItem = await API.createToDoItem(description, sessionAccountID);
                     console.log(todoItem);
@@ -47,7 +50,9 @@ function initCreateTodoForm() {
                     console.log(todoItem);
                     Table.insertItem(todoItem);
                 }
-                
+                modal.showMessage("Todo item was created");
+            } catch(e) {
+                modal.showMessage("Error on creating the todo item", true);
             } finally {
                 // Reset the form
                 document.getElementById(CONST.CREATE_TODO_FORM_ID).reset();
@@ -81,6 +86,9 @@ function initSignupForm() {
                     sessionStorage.setItem('user', JSON.stringify(userdata));
                 }
                 initLoginButtons();
+                modal.showMessage("Account created");
+            } catch(e) {
+                modal.showMessage("Error on creating account", true);
             } finally {
                 document.getElementById(CONST.SIGNUP_FORM_ID).reset();
                 modal.hide(CONST.SIGNUP_MODAL_ID);
@@ -105,6 +113,8 @@ function initLoginForm() {
                     sessionStorage.setItem('user', JSON.stringify(userdata));
                 }
                 initLoginButtons();
+            } catch(e) {
+                modal.showMessage("Error on username or password", true);
             } finally {
                 document.getElementById(CONST.LOGIN_FORM_ID).reset();
                 Table.init();
