@@ -50,7 +50,7 @@ const API = {
      * Create a Todo.
      *
      * @param {string} description
-     * @returns {Promise<{todoID: string, description: string, completed: boolean}>}
+     * @returns {Promise<{todoID: string, description: string, completed: boolean, userName: string}>}
      */
     createToDoItem: async (description) => apiRequest(
         'CreateToDoItem',
@@ -59,16 +59,34 @@ const API = {
     ),
 
     /**
+     * Create a Todo.
+     *
+     * @param {string} description
+     * @param {int} sessionAccountID
+     * @returns {Promise<{todoID: string, description: string, completed: boolean, userName: string}>}
+     */
+    createToDoItem: async (description, sessionAccountID) => apiRequest(
+        'CreateToDoItem',
+        HTTP_METHOD.POST,
+        { 
+            description,
+            sessionAccountID
+        }
+    ),
+
+    /**
      * Get Todos.
      *
-     * @returns {Promise<Array<{todoID: string, description: string, completed: boolean}>>}
+     * @returns {Promise<Array<{todoID: string, description: string, completed: boolean, userName: string}>>}
      */
     getToDoItems: async () => apiRequest('GetToDoItems', HTTP_METHOD.GET),
 
     /**
      * Log in.
      *
-     * @returns {Promise}
+     * @param {string} email
+     * @param {string} password
+     * @returns {Promise<{accountID: int, email: string, name: string}>}
      */
     login: async (email, password) => apiRequest('GetAccount', HTTP_METHOD.POST, {
         email,
@@ -78,13 +96,32 @@ const API = {
     /**
      * Sign up.
      *
-     * @returns {Promise}
+     * @param {string} email
+     * @param {string} password
+     * @param {string} name
+     * @returns {Promise<{accountID: int, email: string, name: string}>}
      */
     signup: async (email, password, name) => apiRequest('CreateAccount', HTTP_METHOD.POST, {
         email,
         password,
         name,
     }),
+
+    /**
+     * Update ToDo
+     * 
+     * @param {int} accountID
+     * @param {int} todoID
+     * @param {boolean} completed
+     * @returns {Promise<Array<{accountID: int, todoID: int, completed: boolean}>>}
+     */
+    updateToDoItem: async (accountID, todoID, completed) => {
+        console.log("Called update todo");
+        apiRequest('UpdateToDoItem', HTTP_METHOD.POST, {
+        accountID,
+        todoID,
+        completed,
+    })},
 };
 
 export default API;

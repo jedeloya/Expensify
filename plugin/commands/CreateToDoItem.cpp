@@ -20,12 +20,29 @@ void CreateToDoItem::process(SQLite& db) {
     SQResult results;
     const int64_t todoID = SToInt64(db.read("SELECT MAX(todoID) FROM todo;")) + 1;
 
-    db.write(format("INSERT INTO todo (created, todoID, description, completed) VALUES ({}, {}, {}, 0);", SQ(STimeNow()), SQ(todoID), SQ(request["description"])));
+    if(request["accountID"].empty()) {
+        db.write(format("INSERT INTO todo (created, todoID, description, completed) VALUES ({}, {}, {}, 0);", SQ(STimeNow()), SQ(todoID), SQ(request["description"])));
+    } else {
+        db.write(format("INSERT INTO todo (created, todoID, description, completed, accountID) VALUES ({}, {}, {}, 0, {});", SQ(STimeNow()), SQ(todoID), SQ(request["description"]), SQ(request["accountID"])));
+    }
 
-    SData data;
-    data["todoID"] = to_string(todoID);
-    data["description"] = request["description"];
-    response.content = SComposeJSONObject(data.nameValueMap);
+    SQResult data;
+    db.read(format("SELECT todo.*, accounts.name FROM todo LEFT JOIN accounts on todo.accountID = accounts.accountID WHERE todoID = {};", todoID), data);
+
+    list<string> todoItems;
+    for (auto& item : data.rows) {
+        SData data;
+        data["created"] = item["created"];
+        data["todoID"] = item["todoID"];
+        data["description"] = item["description"];
+        data["completed"] = item["completed"] == "1";
+        data["accountID"] = item["accountID"];
+        data["userName"] = item["name"];
+        std::string jsondata = SComposeJSONObject(data.nameValueMap);
+        SINFO("todo data: " + jsondata);
+        todoItems.push_back(jsondata);
+    }
+    response.content = todoItems.back();
     response.methodLine = "200 OK";
     return;
 }

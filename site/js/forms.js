@@ -35,8 +35,19 @@ function initCreateTodoForm() {
             const description = document.querySelector(`#${CONST.CREATE_TODO_FORM_ID} input[name=description]`).value;
 
             try {
-                const todoItem = await API.createToDoItem(description);
-                Table.insertItem(todoItem);
+                const user = sessionStorage.getItem('user');
+                const sessionAccountID = user ? JSON.parse(user).accountID : "";
+                if(sessionAccountID != "") {
+                    const todoItem = await API.createToDoItem(description, sessionAccountID);
+                    console.log(todoItem);
+                    Table.insertItem(todoItem);
+                }else {
+                    console.log("there is no sessionAccountID");
+                    const todoItem = await API.createToDoItem(description);
+                    console.log(todoItem);
+                    Table.insertItem(todoItem);
+                }
+                
             } finally {
                 // Reset the form
                 document.getElementById(CONST.CREATE_TODO_FORM_ID).reset();
@@ -96,6 +107,7 @@ function initLoginForm() {
                 initLoginButtons();
             } finally {
                 document.getElementById(CONST.LOGIN_FORM_ID).reset();
+                Table.init();
                 modal.hide(CONST.LOGIN_MODAL_ID);
             }
         });
@@ -109,6 +121,7 @@ function initLogout() {
         .addEventListener('click', async (e) => {
             sessionStorage.removeItem('user');
             initLoginButtons();
+            Table.init();
         });
 }
 

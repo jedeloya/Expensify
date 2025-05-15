@@ -65,7 +65,17 @@ switch ($command) {
             echo json_encode(["error" => "Mising description"]);
             return;
         }
-        echo json_encode(callBedrock("CreateToDoItem", ["description" => $_POST["description"]]));
+        Log::info("SessionAccountID: ".$_POST["sessionAccountID"]);
+        if(!isset($_POST["sessionAccountID"])) {
+            $result = json_encode(callBedrock("CreateToDoItem", ["description" => $_POST["description"]]));
+            Log::info("Returning ".$result);
+            echo $result;
+        } else {
+            $result = callBedrock("CreateToDoItem", ["description" => $_POST["description"], "accountID" => $_POST["sessionAccountID"]]);
+            Log::info("Returning ", $result["accountID"]);
+            Log::info("Returning ".json_encode($result));
+            echo json_encode($result);
+        }
         break;
     case 'GetToDoItems':
         echo json_encode(callBedrock("GetToDoItems"));
